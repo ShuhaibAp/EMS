@@ -1,0 +1,383 @@
+{
+	"info": {
+		"_postman_id": "7f992c5e-ed06-4de5-a686-62de6ed53bde",
+		"name": "EMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34468144"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password",
+									"value": "iam@12345",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "aps@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "aps",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "aps",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "iam@12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/token",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change_password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 1b5913e5de51f2f87c857402f6acae211a29d71a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"old_pass\": \"iam@1234\",\r\n  \"new_pass\": \"iam@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/changePassword/change_password/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"changePassword",
+								"change_password",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "Employee View",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 1b5913e5de51f2f87c857402f6acae211a29d71a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"form\": 2,  // ID of the form you want to use\r\n    \"data\": {\r\n        \"Full Name\": \"Ted\",\r\n        \"Date of Birth\": \"1999-01-01\",\r\n        \"Phone Number\": \"1234567890\",\r\n        \"Password\": \"he@12345\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/employees/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 1b5913e5de51f2f87c857402f6acae211a29d71a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fields\": [\r\n        {\r\n            \"field_id\": 95,  // ID of the field (e.g., Full Name)\r\n            \"value\": \"ted\"\r\n        }\r\n    ]\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/forms/81/employees/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"forms",
+								"81",
+								"employees",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dynamic Form",
+			"item": [
+				{
+					"name": "Form",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 1b5913e5de51f2f87c857402f6acae211a29d71a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fname\": \"Employee Details Form\",\r\n    \"fields\": [\r\n        {\r\n            \"label\": \"Full Name\",\r\n            \"input_type\": \"text\",\r\n            \"order\": 1\r\n        },\r\n        {\r\n            \"label\": \"Date of Birth\",\r\n            \"input_type\": \"date\",\r\n            \"order\": 2\r\n        },\r\n        {\r\n            \"label\": \"Phone Number\",\r\n            \"input_type\": \"number\",\r\n            \"order\": 3\r\n        },\r\n        {\r\n            \"label\": \"Password\",\r\n            \"input_type\": \"password\",\r\n            \"order\": 4\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/forms/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"forms",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fields",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 1b5913e5de51f2f87c857402f6acae211a29d71a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  { \"label\": \"FullName\", \"input_type\": \"text\", \"order\": 1 },\r\n  { \"label\": \"Phone\", \"input_type\": \"number\", \"order\": 2 },\r\n  { \"label\": \"Date_Joined\", \"input_type\": \"date\", \"order\": 3 }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/forms/1/fields/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"forms",
+								"1",
+								"fields",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Profile",
+			"item": [
+				{
+					"name": "Create User Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 1b5913e5de51f2f87c857402f6acae211a29d71a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "bio",
+									"value": "Hello Im Jane",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Photos/collection/cox.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/profile/create_profile/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"profile",
+								"create_profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 1b5913e5de51f2f87c857402f6acae211a29d71a",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/profile/view_profile/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"profile",
+								"view_profile",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
