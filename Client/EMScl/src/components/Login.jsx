@@ -58,16 +58,11 @@ function Login() {
                 </div>
                 <button className="btn btn-primary w-100" onClick={(e)=>{FormSubmit(e)}}>Sign in</button>
             
-            <div className="container d-flex justify-content-between mt-3">
                 <small>
                     <Link to="/reg" className='text-decoration-none'>Register here</Link>
                 </small>
-                <small>
-                    <Link to="/changepass" className='text-decoration-none'>Change Password</Link>
-                </small>
             </div>
         </div>
-    </div>
   )
 }
 
